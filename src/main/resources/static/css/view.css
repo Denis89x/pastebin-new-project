@@ -1,0 +1,22 @@
+body {
+    margin-left: 40px;
+}
+
+.logout {
+    padding-top: 10px;
+}
+
+.btn-submit {
+    width: 200px;
+    margin-top: 20px;
+}
+
+.main-block {
+    margin-top: 100px;
+}
+
+p {
+    max-width: 940px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}

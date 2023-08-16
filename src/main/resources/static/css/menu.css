@@ -1,0 +1,287 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #F9F9F9;
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #fefefe;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e7e7e9;
+}
+
+.profile {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    margin-right: 95px;
+}
+
+.profile-message {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    margin-right: 30px;
+}
+
+.profile img {
+    width: 40px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+.profile-message img {
+    width: 40px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+.profile:hover img {
+    opacity: 1;
+}
+
+.profile-message:hover img {
+    opacity: 1;
+}
+
+.profile-message:hover {
+    text-decoration: none;
+}
+
+.profile:active img {
+    opacity: 0.5;
+}
+
+.profile-message:active img {
+    opacity: 0.5;
+}
+
+.profile:focus {
+    outline: none;
+}
+
+.profile-message:focus {
+    outline: none;
+}
+
+.btn-submit {
+    width: 14.3em;
+}
+
+.btn-chg {
+    width: 8.5em;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+    gap: 15px;
+}
+
+.btn-cht-primary {
+    color: #fff;
+    background-color: #007bffb2;
+    border-color: #007bff5e;
+}
+
+.btn-cht-primary:hover {
+    background-color: rgba(0, 123, 255, 0.86);;
+}
+
+.main-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /*height: 80vh;*/
+}
+
+.message-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /*height: 80vh;*/
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+}
+
+.logout {
+    padding-top: 10px;
+}
+
+.text {
+    font-size: 20px;
+}
+
+.textarea {
+    width: 286px;
+    height: 310px;
+}
+
+.textareaMessage {
+    width: 286px;
+    height: 260px;
+    font-size: 16px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.profile-block {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 15px;
+    width: 200px;
+    height: auto;
+    background-color: #fefefe;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.profile-block.show {
+    opacity: 0.8;
+}
+
+.profile-content {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0.7;
+}
+
+.user-login {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.settings-btn,
+.create-btn,
+.logout-btn {
+    text-align: center;
+    width: 180px;
+    padding: 5px;
+    margin-bottom: 5px;
+    border: none;
+    background-color: transparent;
+    color: #000000;
+    font-size: 16px;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.settings-btn:hover,
+.create-btn:hover,
+.logout-btn:hover {
+    opacity: 0.8;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.settings-btn:hover {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #000000;
+}
+
+.settings-btn:focus,
+.create-btn:focus,
+.logout-btn:focus {
+    outline: none;
+    opacity: 0.5;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.menu-btn {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    margin-left: 100px;
+}
+
+.text-link {
+    color: #5d5d5d;
+    font-size: 18px;
+    margin-right: 10px;
+    transition: color 0.5s ease-in-out;
+}
+
+.text-link:hover {
+    color: #3b3b3b;
+    text-decoration: none;
+}
+
+.text-link:active {
+    color: #1c1c1c;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+}
+
+.button-container button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.button-img {
+    width: 18px;
+}
+
+.settings-btn a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.create-btn {
+    color: #5d5d5d;
+}
+
+.alert {
+    text-align: center;
+    margin-bottom: 5px;
+    padding-bottom: 0;
+}
+
+.message-inp {
+    margin-bottom: 10px;
+    width: 286px;
+}

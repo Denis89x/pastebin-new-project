@@ -1,0 +1,46 @@
+/* Обновленные стили */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3em;
+}
+
+/* Стили для родительского элемента таблицы */
+.table-container {
+    margin-top: 100px;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+table {
+    width: 100%; /* Изменение ширины таблицы на 100% */
+    border-collapse: collapse;
+    margin-top: 1em;
+    table-layout: fixed;
+}
+
+th, td {
+    padding: 0.5em;
+    text-align: center;
+}
+
+.text-content {
+    width: 50%;
+    overflow-wrap: break-word;
+}
+
+.date-time {
+    width: 30%;
+}
+
+.logout {
+    padding-top: 10px;
+}
+
+.btn-submit {
+    width: 200px;
+    margin-top: 20px;
+}

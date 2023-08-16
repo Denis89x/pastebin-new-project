@@ -1,0 +1,99 @@
+body {
+    background-color: #F9F9F9;
+}
+
+.container {
+    margin-top: 100px;
+}
+
+.already {
+    padding-left: 5px;
+}
+
+.already:hover {
+    text-decoration: none;
+}
+
+.signup-link {
+    margin-top: 0;
+}
+
+.auth__input {
+    margin: 0 0 20px;
+}
+
+.input-prefix {
+    display: block;
+    position: relative;
+}
+
+.auth__title {
+    margin: 0 0 25px;
+    text-align: center;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+.h2 {
+    font-size: 38px;
+    letter-spacing: -.2px;
+    line-height: 45px;
+}
+
+.input-prefix--auth .input-prefix__input:hover {
+    border-color: #00a2fb;
+}
+
+.input-prefix--auth .input-prefix__input {
+    border: 1px solid #e2e2ea;
+    padding-right: 50px;
+    font-size: 15px;
+}
+
+.input-prefix__input {
+    -webkit-appearance: none;
+    border: 1px solid #e2e2ea;
+    border-radius: 6px;
+    color: #000;
+    font-size: 14px;
+    height: 45px;
+    line-height: 17px;
+    padding: 0 14px;
+    transition: .3s;
+    user-select: text;
+    width: 100%;
+}
+
+.auth__link {
+    text-align: center;
+    padding: 25px;
+}
+
+.auth__link a {
+    text-decoration: none;
+}
+
+.auth__link:hover {
+    text-decoration: none;
+}
+
+.auth__link span {
+    color: #006bde;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.auth__link span:hover {
+    color: #004893;
+}
+
+.auth__link p {
+    color: black;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 0;
+}

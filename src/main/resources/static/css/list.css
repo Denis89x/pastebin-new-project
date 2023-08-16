@@ -1,0 +1,51 @@
+body {
+    margin-top: 3em;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 1em auto;
+    table-layout: fixed;
+}
+
+th, td {
+    padding: 0.5em;
+    text-align: center;
+}
+
+.username-name, .message-name {
+    width: 50px;
+}
+
+.link-name {
+    width: 150px;
+}
+
+.author-name {
+    width: 250px;
+}
+
+.date-name {
+    width: 200px;
+}
+
+.delete-name {
+    width: 100px;
+}
+
+.text-list {
+    text-align: center;
+}
+
+.logout {
+    padding-top: 10px;
+}
+
+.btn-submit {
+    width: 200px;
+    margin-top: 20px;
+}
+
+.central-block {
+    margin-top: 100px;
+}

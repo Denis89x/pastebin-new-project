@@ -1,0 +1,86 @@
+.messages-block {
+    width: 500px;
+    min-height: 700px;
+    margin: 100px auto auto;
+    background-color: #fefefe;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.messages-block h2 {
+    text-align: center;
+}
+
+hr {
+    width: 400px;
+}
+
+.message-pic {
+    width: 55px;
+    height: 55px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.message-name {
+    font-size: 18px;
+}
+
+.message-name:hover {
+    color: #004893;
+}
+
+.message-button:hover {
+    background-color: rgba(196, 196, 196, 0.1);
+    text-decoration: none;
+    border-radius: 15px;
+}
+
+.message-button {
+    text-decoration: none;
+    width: 400px;
+    display: flex;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

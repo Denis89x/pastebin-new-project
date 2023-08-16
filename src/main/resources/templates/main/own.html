@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Own texts</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/menu.css">
+	<link rel="stylesheet" href="/css/ranking.css">
+</head>
+<body>
+<div class="menu">
+	<div class="menu-btn">
+		<div class="btn-container">
+			<a href="/send/text/add" class="text-link">Pastebin</a>
+		</div>
+		<div th:if="${account != null && account.getRole() == 'ROLE_ADMIN'}">
+			<div class="btn-container">
+				<a href="/send/text/list" class="text-link">Show All Texts</a>
+			</div>
+		</div>
+		<div class="btn-container">
+			<a href="/send/text/own" class="text-link">Own texts</a>
+		</div>
+		<div class="btn-container">
+			<a href="/send/ranking" class="text-link">Ranking</a>
+		</div>
+	</div>
+	<div class="profile-container">
+		<a class="profile-message" href="/messages/messages">
+			<img src="/images/message.svg" alt="Settings" class="button-img">
+		</a>
+		<button class="profile" tabindex="-1"><img src="/images/user.svg" alt="User-profile"></button>
+		<div class="profile-block" id="profileBlock">
+			<div class="profile-content">
+				<div class="profile-info">
+					<p th:text="${account.getUsername()}" class="user-login">Username</p>
+				</div>
+				<a class="settings-btn" href="/profile">
+					Settings
+					<img src="/images/settings.svg" alt="Settings" class="button-img">
+				</a>
+				<button class="create-btn">
+					Author
+					<img src="/images/about.svg" alt="Author" class="button-img">
+				</button>
+				<form th:action="@{/logout}" th:method="POST" onsubmit="return confirm('Are you sure you want to log out?');">
+					<button type="submit" class="logout-btn">
+						Logout
+						<img src="/images/exit.svg" alt="Logout" class="button-img">
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="ranking-block">
+	<h1 class="ranking-text">Your texts</h1>
+	<table>
+		<tr>
+			<th class="username-name">Text Content</th>
+			<th class="message-name">Date Time</th>
+		</tr>
+		<tr th:each="text, index : ${texts}">
+			<td class="text-cont" th:text="${textFromLinks[__${index.index}__]}"></td>
+			<td class="date-time" th:text="${text.time}"></td>
+		</tr>
+	</table>
+	<div class="btn-container logout">
+		<a href="/send/text/add" class="btn btn-lg btn-primary btn-submit">Back</a>
+	</div>
+</div>
+<script src="/scripts/menu.js"></script>
+</body>
+</html>

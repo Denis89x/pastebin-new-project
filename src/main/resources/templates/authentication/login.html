@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Login page</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body>
+<div class="container">
+  <form method="post" action="/process_login" class="form-signin">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    <h1 class="auth__title bold h2 on-rts">Login</h1>
+    <p th:if="${param.error}" class="alert alert-danger">Invalid username or password</p>
+      <label for="username" class="input-prefix input-prefix--auth auth__input">
+        <input id="username" name="username" class="input-prefix__input" placeholder="E-mail or Login" required="" autofocus="">
+      </label>
+      <label for="password" class="input-prefix input-prefix--auth auth__input">
+        <input type="password" id="password" name="password" class="input-prefix__input" placeholder="Password" required="">
+      </label>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+    <a href="/auth/registration" class="auth__link">
+      <p>
+        New user? <span>Sign up</span>
+      </p>
+    </a>
+  </form>
+</div>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+</body>
+</html>

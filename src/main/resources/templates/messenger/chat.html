@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat with th:text="${receiver}"></title>
+  <link rel="stylesheet" href="/css/menu.css">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+</head>
+<body>
+<div class="menu">
+  <div class="menu-btn">
+    <div class="btn-container">
+      <a href="/send/text/add" class="text-link">Pastebin</a>
+    </div>
+    <div th:if="${account != null && account.getRole() == 'ROLE_ADMIN'}">
+      <div class="btn-container">
+        <a href="/send/text/list" class="text-link">Show All Texts</a>
+      </div>
+    </div>
+    <div class="btn-container">
+      <a href="/send/text/own" class="text-link">Own texts</a>
+    </div>
+    <div class="btn-container">
+      <a href="/send/ranking" class="text-link">Ranking</a>
+    </div>
+  </div>
+  <div class="profile-container">
+    <a class="profile-message" href="/messages/messages">
+      <img src="/images/message.svg" alt="Settings" class="button-img">
+    </a>
+    <button class="profile" tabindex="-1"><img src="/images/user.svg" alt="User-profile"></button>
+    <div class="profile-block" id="profileBlock">
+      <div class="profile-content">
+        <div class="profile-info">
+          <p th:text="${account.getUsername()}" class="user-login">Username</p>
+        </div>
+        <a class="settings-btn" href="/profile">
+          Settings
+          <img src="/images/settings.svg" alt="Settings" class="button-img">
+        </a>
+        <button class="create-btn">
+          Author
+          <img src="/images/about.svg" alt="Author" class="button-img">
+        </button>
+        <form th:action="@{/logout}" th:method="POST" onsubmit="return confirm('Are you sure you want to log out?');">
+          <button type="submit" class="logout-btn">
+            Logout
+            <img src="/images/exit.svg" alt="Logout" class="button-img">
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<h1>Chat with <span th:text="${receiver}"></span></h1>
+
+<div>
+  <ul>
+    <li th:each="message : ${messages}">
+      <p>
+        <span th:text="${message.sender.username}"></span>:
+        <span th:text="${message.content}"></span>
+      </p>
+    </li>
+  </ul>
+</div>
+
+<form th:action="@{'/messages/messages/' + ${receiver}}" method="post">
+  <input type="text" name="messageContent" placeholder="Enter your message">
+  <button type="submit">Send</button>
+</form>
+
+<a th:href="@{'/messages/messages'}">Back to users</a>
+
+<script>
+  const currentUser = /*[[${currentUser}]]*/ null;
+  const receiver = /*[[${receiver}]]*/ null;
+
+  const socket = new WebSocket("ws://" + window.location.host + "/ws");
+  const stompClient = Stomp.over(socket);
+
+  stompClient.connect({}, function (frame) {
+    stompClient.subscribe("/topic/messages/" + receiver, function (message) {
+      // Handle received message and update the chat UI
+      const data = JSON.parse(message.body);
+      // Update your chat UI using data
+    });
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+  <script src="/scripts/menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>User Settings</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/menu.css">
+	<link rel="stylesheet" href="/css/profile.css">
+</head>
+<body>
+<main>
+	<div class="menu">
+		<div class="menu-btn">
+			<div class="btn-container">
+				<a href="/send/text/add" class="text-link">Pastebin</a>
+			</div>
+			<div th:if="${account != null && account.getRole() == 'ROLE_ADMIN'}">
+				<div class="btn-container">
+					<a href="/send/text/list" class="text-link">Show All Texts</a>
+				</div>
+			</div>
+			<div class="btn-container">
+				<a href="/send/text/own" class="text-link">Own texts</a>
+			</div>
+			<div class="btn-container">
+				<a href="/send/ranking" class="text-link">Ranking</a>
+			</div>
+		</div>
+		<div class="profile-container">
+			<a class="profile-message" href="/messages/messages">
+				<img src="/images/message.svg" alt="Settings" class="button-img">
+			</a>
+			<button class="profile" tabindex="-1"><img src="/images/user.svg" alt="User-profile"></button>
+			<div class="profile-block" id="profileBlock">
+				<div class="profile-content">
+					<div class="profile-info">
+						<p th:text="${account.getUsername()}" class="user-login">Username</p>
+					</div>
+					<button class="settings-btn">
+						Settings
+						<img src="/images/settings.svg" alt="Settings" class="button-img">
+					</button>
+					<button class="create-btn">
+						Author
+						<img src="/images/about.svg" alt="Author" class="button-img">
+					</button>
+					<form th:action="@{/logout}" th:method="POST" onsubmit="return confirm('Are you sure you want to log out?');">
+						<button type="submit" class="logout-btn">
+							Logout
+							<img src="/images/exit.svg" alt="Logout" class="button-img">
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="settings-block">
+		<h2>Settings</h2>
+		<hr>
+		<div class="profile-information">
+			<div class="profile-picture-container">
+				<!-- Изображение пользователя или дефолтное изображение -->
+				<label for="file-input" class="profile-picture-label" onmouseover="showArrow()" onmouseout="hideArrow()">
+					<img id="profile-picture" th:if="${account.profilePicture}" th:src="${account.profilePicture}" alt="Profile Picture" class="pr-image" onclick="uploadNewPicture()" />
+					<img th:unless="${account.profilePicture}" src="/images/person.jpg" alt="Profile Picture" class="pr-image" onclick="uploadNewPicture()" />
+				</label>
+
+				<!-- Скрытая форма для загрузки нового изображения -->
+				<form th:action="@{/profile/upload-profile-picture}" method="post" enctype="multipart/form-data" id="upload-form" style="display:none;">
+					<input type="file" name="file" accept="image/*" id="file-input" onchange="uploadPicture()">
+				</form>
+			</div>
+			<div>
+				<p th:text="'Username: ' + ${account.getUsername()}" class="username-text">Username</p>
+				<button class="okay-btn" onclick="toggleUsernameForm()">Change username</button>
+				<div class="alert alert-danger" th:if="${usernameError}" id="validationForm">
+					<p th:text="${usernameError}"></p>
+				</div>
+				<form th:action="@{/profile/change-username}" method="post" id="usernameForm" class="form-profile">
+					<label for="newUsernameInput" class="pr-newu">New Username:</label>
+					<input type="text" id="newUsernameInput" name="newUsername" placeholder="Enter new username" class="pr-input">
+					<button type="submit" class="okay-btn pr-confirm" id="confirmButton">Confirm</button>
+					<hr class="pr-hr">
+				</form>
+			</div>
+			<div>
+				<button class="okay-btn" onclick="togglePasswordForm()">Change the password</button>
+				<div class="alert alert-danger" th:if="${passwordError}">
+					<p th:text="${passwordError}"></p>
+				</div>
+				<div class="alert alert-success" th:if="${successMessage}">
+					<p th:text="${successMessage}"></p>
+				</div>
+				<form th:action="@{/profile/change-password}" method="post" id="passwordForm" class="form-profile">
+					<div id="oldPassword">
+						<label for="currentPasswordInput" class="pr-current">Current password</label>
+						<input type="password" id="currentPasswordInput" name="currentPassword" placeholder="Input current password" class="pr-input">
+						<button type="button" onclick="showNewPasswordDiv()" class="okay-btn pr-confirm" id="confirmPasswordButton">Confirm</button>
+					</div>
+					<div id="newPassword" style="display: none;">
+						<label for="newPasswordInput" class="pr-new">New password:</label>
+						<input type="password" id="newPasswordInput" name="newPassword" placeholder="Input new password" class="pr-input">
+						<button type="submit" class="okay-btn pr-confirm" id="confirmNewPasswordButton">Confirm</button>
+					</div>
+					<hr class="pr-hr">
+				</form>
+			</div>
+			<div>
+				<p th:text="${maskedEmail}" class="username-text"></p>
+				<button class="okay-btn" onclick="toggleEmailForm()">Change email</button>
+				<div class="alert alert-danger" th:if="${emailError}" id="validationEmailForm">
+					<p th:text="${emailError}"></p>
+				</div>
+				<form th:action="@{/profile/change-email}" method="post" id="emailForm" class="form-profile">
+					<label for="newEmailInput" class="pr-newu">New E-mail:</label>
+					<input type="text" id="newEmailInput" name="newEmail" placeholder="Enter new email" class="pr-input">
+					<button type="submit" class="okay-btn pr-confirm" id="confirmNewEmailButton">Confirm</button>
+					<hr class="pr-hr">
+				</form>
+			</div>
+			<div th:if="${account != null && account.getIsVerifiedEmail() == false}">
+				<button type="submit" class="okay-btn" onclick="toggleVerificationCodeBlock()">Verify email</button>
+				<div id="verifyEmailBlock">
+					<p class="profile-text">Your email isn't verified!</p>
+					<form th:action="@{/profile/send-verification-code}" method="post">
+						<div  class="alert alert-success" th:if="${successMessage}">
+							<p th:text="${successMessage}"></p>
+						</div>
+						<div th:if="${emailError}" class="alert alert-danger">
+							<p th:text="${emailError}"></p>
+						</div>
+						<button type="submit" class="okay-btn">Send code</button>
+					</form>
+					<form th:action="@{/profile/verify-email}" method="post">
+						<div class="alert alert-success" th:if="${successSend}">
+							<p th:text="${successSend}"></p>
+						</div>
+						<div class="alert alert-danger" th:if="${InvalidCode}">
+							<p th:text="${InvalidCode}"></p>
+						</div>
+						<div class="alert alert-danger" th:if="${verificationError}">
+							<p th:text="${verificationError}"></p>
+						</div>
+						<input class="pr-input" type="text" name="verificationCode" placeholder="Enter verification code" required>
+						<button type="submit" class="okay-btn">Verify</button>
+					</form>
+					<hr class="pr-hr">
+				</div>
+			</div>
+			<div th:if="${account != null && account.getIsVerifiedEmail() == true}">
+				<div class="alert alert-success" th:if="${successVerify}">
+					<p th:text="${successVerify}"></p>
+				</div>
+				<p class="profile-text">Your email is verified!</p>
+				<form th:action="@{/profile/unlink-email}" method="post">
+					<button type="submit" class="okay-btn">Unlink email</button>
+				</form>
+			</div>
+			<form th:action="@{/logout}" th:method="POST" onsubmit="return confirm('Are you sure you want to log out?');">
+				<button type="submit" class="okay-btn">Logout</button>
+			</form>
+		</div>
+	</div>
+</main>
+<script src="/scripts/menu.js"></script>
+<script src="/scripts/settings.js"></script>
+<script src="https://kit.fontawesome.com/a1a44e76b4.js" crossorigin="anonymous"></script>
+</body>
+</html>
